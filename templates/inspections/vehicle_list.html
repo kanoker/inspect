@@ -1,0 +1,26 @@
+<!-- inspections/templates/inspections/vehicle_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicles List</title>
+</head>
+<body>
+    <h2>Vehicles List</h2>
+    <ul>
+        {% for vehicle in vehicles %}
+            <li>
+                {{ vehicle.license_plate }} - 
+                <a href="{% url 'vehicle_detail' vehicle.id %}">Details</a> | 
+                <a href="{% url 'vehicle_update' vehicle.id %}">Update</a> | 
+                <form action="{% url 'vehicle_delete' vehicle.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'vehicle_create' %}">Add Vehicle</a>
+</body>
+</html>

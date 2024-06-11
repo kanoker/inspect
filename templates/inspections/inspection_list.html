@@ -1,0 +1,17 @@
+<!-- inspections/templates/inspections/inspection_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspections List</title>
+</head>
+<body>
+    <h2>Inspections List</h2>
+    <ul>
+        {% for inspection in inspections %}
+            <li><a href="{% url 'inspection_detail' inspection.id %}">{{ inspection }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

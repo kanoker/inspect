@@ -1,0 +1,23 @@
+h1 {
+    color: rgb(255, 145, 0);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.product-container{
+border: 1px solid #ccc;
+padding: 10px;
+margin-bottom: 10px;
+width: 300px;
+
+}
+
+.product-name{
+    font-weight: bold;
+}
+
+.product-price{
+    color: green;
+}
