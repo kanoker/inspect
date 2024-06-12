@@ -1,0 +1,21 @@
+{% extends 'assets/main.html'%}
+{% load static %}
+
+
+{% block mainContent%}
+
+    <h3>{{ inspection.vehicle }} </h3>
+    <a class="btn btn-info btn-sm mb-1 " href="{% url 'upload_photo' inspection.id %}"> <i class="bi bi-camera"></i> ถ่ายภาพ</a>
+    <ul>
+        {% for photo in photos %}
+        <li>
+            <a href="{% url 'photo_detail' photo.id %}">
+            <img src="{{ photo.image_thumbnail.url }}" alt="{{ photo.description }}" style="max-width: 100px;">
+            </a>
+            <p>{{ photo.description }}</p>
+            <p><small>Uploaded on {{ photo.created_at }}</small></p>
+          </li>
+
+        {% endfor %}
+    </ul>
+    {% endblock mainContent%}

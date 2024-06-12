@@ -1,0 +1,15 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Start Photo Session</title>
+</head>
+<body>
+    <h1>Start Photo Session</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Submit" class="btn btn-success">
+    </form>
+</body>
+</html>

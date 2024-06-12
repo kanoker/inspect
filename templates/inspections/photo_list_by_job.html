@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Photos for Job {{ job.code }}</title>
+</head>
+<body>
+    <h1>Photos for Job {{ job.code }}</h1>
+    <p>{{ job.description }}</p>
+    {% for inspection in inspections %}
+        <h2>Inspection {{ inspection.id }} ({{ inspection.date }})</h2>
+        {% for session in inspection.sessions.all %}
+            <h3>Session {{ session.id }} ({{ session.date }})</h3>
+            <ul>
+                {% for photo in session.photos.all %}
+                    <li>
+                        <img src="{{ photo.image_thumbnail.url }}" alt="Thumbnail">
+                        <p>Vehicle: {{ inspection.vehicle.registration }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% endfor %}
+    <a href="{% url 'start_inspection' %}">Start a new inspection</a>
+    <a href="{% url 'start_session' %}">Start a new session</a>
+    <a href="{% url 'upload_photo' %}">Upload another photo</a>
+</body>
+</html>
