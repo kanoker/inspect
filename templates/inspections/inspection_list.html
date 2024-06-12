@@ -1,17 +1,91 @@
 <!-- inspections/templates/inspections/inspection_list.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inspections List</title>
-</head>
-<body>
-    <h2>Inspections List</h2>
-    <ul>
-        {% for inspection in inspections %}
-            <li><a href="{% url 'inspection_detail' inspection.id %}">{{ inspection }}</a></li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+
+{% extends 'assets/main.html'%}
+{% load static %}
+
+
+{% block mainContent%}
+
+    <div class="container mt-4">
+        <dev class="mobile-font-size">
+        <h3>Surveys List</h3>
+        <div class="text-end">
+        <a href="{% url 'inspection_create' %}" class="btn btn-primary mb-3 float-right">New Item</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <span class="desktop-label">Vehicle</span>
+                            <span class="mobile-label">รถ</span>
+                        </th>
+                        <th>
+                            <span class="desktop-label">Date</span>
+                            <span class="mobile-label">วัน</span>
+                        </th>
+                        <th class="mobile-hidden">Inspector</th>
+                        <th>
+                            <span class="desktop-label">Status</span>
+                            <span class="mobile-label">Stat</span>
+                        </th>
+                        <th>
+                            <span class="desktop-label">Actions</span>
+                            <span class="mobile-label">Act</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for inspection in page_obj %}
+                        <tr>
+                            <td>{{ inspection.vehicle }}</td>
+                            <td >{{ inspection.inspection_date }}</td>
+                            <td class="mobile-hidden">{{ inspection.inspector }}</td>
+                            <td>{{ inspection.status }}</td>
+                            <td>
+                                <a href="{% url 'inspection_detail' inspection.id %}" class="btn btn-info btn-sm mb-1 ">Details</a>
+                                <a href="{% url 'inspection_update' inspection.id %}" class="btn btn-warning btn-sm mb-1 ">Update</a>
+                                <form action="{% url 'inspection_delete' inspection.id %}" method="post" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                    <a class="page-link" href="?page=1">First</a>
+                </li>
+                {% comment %} <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                </li> {% endcomment %}
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active">
+                            <a class="page-link" href="#">{{ num }}</a>
+                        </li>
+                    {% elif num > 0 and num <= page_obj.paginator.num_pages %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% comment %} <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                </li> {% endcomment %}
+
+                <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
+
+{% endblock mainContent%}

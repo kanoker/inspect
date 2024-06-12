@@ -1,16 +1,16 @@
 <!-- inspections/templates/inspections/inspection_detail.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inspection Detail</title>
-</head>
-<body>
-    <h2>Inspection Detail</h2>
+{% extends 'assets/main.html'%}
+{% load static %}
+
+
+{% block mainContent%}
+
+    <h2>Survey Detail</h2>
     <p><strong>Vehicle:</strong> {{ inspection.vehicle }}</p>
     <p><strong>Inspection Date:</strong> {{ inspection.inspection_date }}</p>
     <p><strong>Inspector:</strong> {{ inspection.inspector }}</p>
+    <p><strong>Note:</strong> {{ inspection.inspection_report }}</p>
+    <p><strong>status:</strong> {{ inspection.status }}</p>
     <!-- Additional details as needed -->
-</body>
-</html>
+    <a href="javascript:history.back()" class="btn btn-secondary mt-3">Back</a>
+{% endblock mainContent%}

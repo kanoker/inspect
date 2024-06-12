@@ -1,17 +1,16 @@
-<!-- inspections/templates/inspections/inspection_form.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if form.instance.pk %}Update{% else %}Create{% endif %} Inspection</title>
-</head>
-<body>
-    <h2>{% if form.instance.pk %}Update{% else %}Create{% endif %} Inspection</h2>
+<!-- inspections/templates/inspections/inspection_form.html -->{% extends 'assets/main.html'%}
+{% load static %}
+
+
+{% block mainContent%}
+    <h3>{% if form.instance.pk %}Update{% else %}Create{% endif %} Survey</h3>
+    <dev class="mobile-font-size">
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save</button>
     </form>
-</body>
-</html>
+    </dev>
+
+    <a href="javascript:history.back()" class="btn btn-secondary mt-3">Back</a>
+    {% endblock mainContent%}
