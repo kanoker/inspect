@@ -38,7 +38,7 @@
                 <tbody>
                     {% for inspection in page_obj %}
                         <tr>
-                            <td>{{ inspection.vehicle }}</td>
+                            <td><a href="{% url 'photo_list' inspection.id %}">{{ inspection.vehicle }}</a></td>
                             <td >{{ inspection.inspection_date }}</td>
                             <td class="mobile-hidden">{{ inspection.inspector }}</td>
                             <td>{{ inspection.status }}</td>

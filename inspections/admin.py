@@ -1,5 +1,5 @@
 from django.contrib import admin
-from inspections.models import Inspection, Vehicle
+from inspections.models import Inspection, Vehicle, Photo
 
 
 # Register your models here.
@@ -12,7 +12,12 @@ class InspectionAdmin(admin.ModelAdmin):
 class VehicleAdmin(admin.ModelAdmin):
     list_display = ('license_plate', 'make', 'model', 'year')
     list_filter = ('license_plate', 'make', 'model', 'year')
-    
+
+
+@admin.register(Photo)
+class PhotoAdmin(admin.ModelAdmin):
+    list_display = ('inspection','image','id', 'created_at')
+    list_filter = ('inspection','image','id', 'created_at')
 
 
 

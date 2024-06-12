@@ -1,12 +1,11 @@
 <!-- inspections/templates/inspections/vehicle_list.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehicles List</title>
-</head>
-<body>
+
+{% extends 'assets/main.html'%}
+{% load static %}
+
+
+{% block mainContent%}
+
     <h2>Vehicles List</h2>
     <ul>
         {% for vehicle in vehicles %}
@@ -22,5 +21,5 @@
         {% endfor %}
     </ul>
     <a href="{% url 'vehicle_create' %}">Add Vehicle</a>
-</body>
-</html>
+
+    <{% endblock mainContent%}
