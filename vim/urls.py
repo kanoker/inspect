@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from inspections.views import index, aboutus
+from inspections.views import index, aboutus, coming
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +29,7 @@ urlpatterns = [
     path('reports/', include('reports.urls')),
     path('', index, name="home"),
     path('aboutus/', aboutus, name="aboutus"),
+    path('coming/', coming, name="coming"),
 ]
 
 if settings.DEBUG:

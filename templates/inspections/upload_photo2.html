@@ -5,7 +5,7 @@
 
 {% block mainContent%}
 <div style="padding:20px 20px 20px 20px;">
-    <a class="btn btn-primary" href="{% url 'photo_list' inspection.id %}"> &#8592 Back </a> Camera
+    <a class="btn btn-primary" href="{% url 'photo_list2' inspection.id %}"> &#8592 Back </a> Load
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}

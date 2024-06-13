@@ -8,12 +8,38 @@ class PhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
         fields = ['image', 'description']
+        widgets = {
+            'image': forms.ClearableFileInput(attrs={
+                'accept': 'image/*',  # Accept only image files
+                'capture': 'camera'   # Open the camera for capturing photos
+            }),
+
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'post'
-        # self.helper.add_input(Submit('submit', 'Upload'))
+
+
+class PhotoForm2(forms.ModelForm):
+    class Meta:
+        model = Photo
+        fields = ['image', 'description']
+        widgets = {
+            'image': forms.ClearableFileInput(),  # No extra attributes
+            'description': forms.Textarea(attrs={
+                'placeholder': 'Enter a description'
+            }),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+
+
+
 
 # class PhotoSessionForm(forms.ModelForm):
 #     class Meta:

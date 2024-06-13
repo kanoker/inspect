@@ -1,17 +1,20 @@
 <!-- inspections/templates/inspections/vehicle_form.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if form.instance.pk %}Update{% else %}Create{% endif %} Vehicle</title>
-</head>
-<body>
+{% extends 'assets/main.html'%}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+{% block mainContent%}
+<div style="padding:20px 20px 20px 20px;">
+    <br>
+    <a class="btn btn-primary btn-lg" href="{% url 'vehicle_list' %}"> &#8592 Back </a>
+    <br><br>
     <h2>{% if form.instance.pk %}Update{% else %}Create{% endif %} Vehicle</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
+        {{ form|crispy }}
+        <button  class="btn btn-primary btn-lg" type="submit"> บันทึก </button>
     </form>
-</body>
-</html>
+
+</div>
+{% endblock mainContent%}

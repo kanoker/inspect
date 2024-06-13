@@ -3,7 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Inspection, Vehicle, Photo
-from .forms import InspectionForm, VehicleForm, PhotoForm
+from .forms import InspectionForm, VehicleForm, PhotoForm, PhotoForm2
 
 
 def inspection_list(request):
@@ -109,6 +109,10 @@ def aboutus(request):
     context = {}
     return render(request,"about-us.html",context)
 
+def coming(request):
+    context = {}
+    return render(request,"coming.html",context)
+
 
 
 def upload_photo(request, inspection_id):
@@ -123,6 +127,20 @@ def upload_photo(request, inspection_id):
     else:
         form = PhotoForm(initial={'inspection': inspection})
     return render(request, 'inspections/upload_photo.html', {'form': form, 'inspection': inspection})
+
+
+def upload_photo2(request, inspection_id):
+    inspection = Inspection.objects.get(id=inspection_id)
+    if request.method == 'POST':
+        form = PhotoForm2(request.POST, request.FILES)
+        if form.is_valid():
+            photo = form.save(commit=False)
+            photo.inspection = inspection
+            form.save()
+            return redirect('photo_list', inspection_id=inspection.id)
+    else:
+        form = PhotoForm2(initial={'inspection': inspection})
+    return render(request, 'inspections/upload_photo2.html', {'form': form, 'inspection': inspection})
 
 # def start_photo_session(request):
 #     if request.method == 'POST':
@@ -148,6 +166,12 @@ def photo_list(request, inspection_id):
     inspection = Inspection.objects.get(id=inspection_id)
     photos = Photo.objects.all().order_by('-created_at')
     return render(request, 'inspections/photo_list.html', {'inspection': inspection, 'photos': photos})
+
+def photo_list2(request, inspection_id):
+    inspection = Inspection.objects.get(id=inspection_id)
+    photos = Photo.objects.all().order_by('-created_at')
+    return render(request, 'inspections/photo_list.html', {'inspection': inspection, 'photos': photos})
+
 
 def photo_list_by_vehicle(request, vehicle_registration):
     vehicle = get_object_or_404(Vehicle, registration=vehicle_registration)

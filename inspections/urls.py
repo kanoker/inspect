@@ -16,9 +16,11 @@ urlpatterns = [
     path('vehicles/<int:id>/update/', views.vehicle_update, name='vehicle_update'),
     path('vehicles/<int:id>/delete/', views.vehicle_delete, name='vehicle_delete'),
     path('<int:inspection_id>/upload/', views.upload_photo, name='upload_photo'),
+    path('<int:inspection_id>/upload2/', views.upload_photo2, name='upload_photo2'),
     # path('start_session/', views.start_photo_session, name='start_session'),
     # path('start_inspection/', views.start_inspection, name='start_inspection'),
     path('photos/<int:inspection_id>/', views.photo_list, name='photo_list'),
+    path('photos/<int:inspection_id>/', views.photo_list2, name='photo_list2'),
     path('photos/vehicle/<str:vehicle_license_plate>/', views.photo_list_by_vehicle, name='photo_list_by_vehicle'),
     path('photo/<int:photo_id>/', views.photo_detail, name='photo_detail'), 
 
